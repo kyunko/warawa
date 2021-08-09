@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+    <style>
+        body{
+            overflow: hidden;
+        }
+        .slidedoor{
+            position: absolute;
+            height: 100vh;
+            width: calc(100% / 2);
+        }
+        .slide{
+            position: absolute;
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+
+<div id="slide1" class="slide" style="background-color: rgb(201, 121, 121);left:0%;">
+
+</div>
+<div id="slide2" class="slide" style="background-color: rgb(115, 173, 110);left:100%;">
+
+</div>
+<div id="slide3" class="slide" style="background-color: rgb(121, 192, 201);left:200%;">
+
+</div>
+<div id="slide4" class="slide" style="background-color: rgb(162, 121, 201);left:300%;">
+
+</div>
+<div id="slide5" class="slide" style="background-color: rgb(193, 201, 121);left:400%;">
+
+</div>
+<div id="left-slide" class="slidedoor" style="background-color: aqua;left:0px;">
+
+</div>
+<div id="right-slide" class="slidedoor" style="background-color: rgb(238, 255, 0);right:0px">
+
+</div>
+
+
+
+<script>
+
+var CurrentSlide = 1
+var TotalSlide = 5
+
+window.addEventListener('wheel', e => {
+
+        if (e.deltaY < 0 /* or some negative number so it doesn't fire on the slightest touch*/) {
+    // scrolled up
+    if (CurrentSlide > 1){
+        CurrentSlide--;
+        if (CurrentSlide == 1){
+        $.when(
+        $( "#left-slide" ).animate({
+            left: "+=50%",
+        }, 500, function() {
+            // Animation complete.
+        }),
+        $( "#right-slide" ).animate({
+            right: "+=50%",
+        }, 500, function() {
+            // Animation complete.
+        }),
+       
+        )}else{
+            $( "#left-slide" ).animate({
+            left: "+=50%",
+            }, 500, function() {
+                // Animation complete.
+            }),
+            $( "#right-slide" ).animate({
+                right: "+=50%",
+            }, 500, function() {
+                // Animation complete.
+            }),
+            $( ".slide" ).animate({
+                left: "+=100%",
+            }, 500, function() {
+                // Animation complete.
+            })
+            
+        }
+        
+    }
+    
+    
+    
+  
+  } else if (e.deltaY > 0 /* or some positive number so it doesn't fire on the slightest touch*/) {
+    // scrolled down
+    if (CurrentSlide <= TotalSlide){
+    if (CurrentSlide == 1){
+        $.when(
+        $( "#left-slide" ).animate({
+            left: "-=50%",
+        }, 500, function() {
+            // Animation complete.
+        }),$( "#right-slide" ).animate({
+            right: "-=50%",
+        }, 500, function() {
+            // Animation complete.
+        }),
+        )
+    }else{
+        $.when(
+        $( "#left-slide" ).animate({
+            left: "-=50%",
+        }, 500, function() {
+            // Animation complete.
+        }),
+        $( "#right-slide" ).animate({
+            right: "-=50%",
+        }, 500, function() {
+            // Animation complete.
+        }),
+        $( ".slide" ).animate({
+            left: "-=100%",
+        }, 500, function() {
+            // Animation complete.
+        }),
+    
+        )
+    }
+    
+    
+    CurrentSlide++;
+}
+  
+}
+    
+});
+    
+  
+</script>
+</body>
+</html>
